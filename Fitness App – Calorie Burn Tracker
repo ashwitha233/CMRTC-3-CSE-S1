@@ -1,43 +1,35 @@
- Scenario: Fitness App – Calorie Burn Tracker
+public class WorkoutTracker {
+    String name;
+    double weight;
+    String workout;
+    int duration;
 
-You are building a Fitness Tracking Application to help users monitor their calorie burn during workouts.
+    public WorkoutTracker(String name, double weight, String workout, int duration) {
+        this.name = name;
+        this.weight = weight;
+        this.workout = workout;
+        this.duration = duration;
+    }
 
-Each user:
+    public void showSummary() {
+        double met = 0;
+        if (workout.equals("Running")) met = 9.8;
+        else if (workout.equals("Cycling")) met = 7.5;
+        else if (workout.equals("Swimming")) met = 8.3;
 
- Has a name, age, and weight (kg).
- Performs one of the following workouts:
+        double calories = 0.0175 * met * weight * duration;
 
-   Running
-   Cycling
-   Swimming
+        System.out.println("Name: " + name);
+        System.out.println("Workout: " + workout);
+        System.out.println("Weight: " + weight + " kg");
+        System.out.println("Duration: " + duration + " minutes");
+        System.out.printf("Calories Burned: %.1f\n", calories);
+    }
 
-Each workout type has a fixed MET (Metabolic Equivalent Task) value:
-
- Running → 9.8
- Cycling → 7.5
- Swimming → 8.3
-
-Calories burned per minute is calculated by the formula:
-
-Calories/min = 0.0175 * MET * weight
-
-To get total calories burned:
-
-Total Calories=Calories/min×Duration (in minutes)
+    public static void main(String[] args) {
+        WorkoutTracker user1 = new WorkoutTracker("Neha", 60.0, "Running", 30);
+        user1.showSummary();
+    }
+}
 
 
-Your Task:
-
-1. Create a class `WorkoutTracker` with appropriate variables.
-2. You must decide:
-
-    Which variables should be static, instance, or local.
-    How many methods to use to break logic cleanly (e.g., for MET value lookup, calculation, and displaying summary).
-3. Allow tracking for multiple users with different workouts and durations.
-4. Display the workout summary in the following format:
-
-User: Neha
-Workout: Running
-Weight: 60.0 kg
-Duration: 30 minutes
-Calories Burned: 308.7
